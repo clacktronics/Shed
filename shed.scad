@@ -16,8 +16,9 @@ translate([0,0,roof_height - beam_d]) {
 
 
 // Side floor beams
-cube([beam_d,3660,beam_w]);
-translate([3660 - beam_d,0,0]) {cube([beam_d,3660,beam_w]);}
+
+cube([beam_w,3660,beam_d]);
+translate([3660 - beam_w,0,0]) {cube([beam_w,3660,beam_d]);}
 
 // side pilars
 
