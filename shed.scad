@@ -1,6 +1,9 @@
 roof_height = 2440;
+roof_angle = 5;
 beam_w = 50.8;
 beam_d = 101.6;
+roof_offset = -610;
+
 
 // BASE ////////////////
 
@@ -55,9 +58,9 @@ translate([0,3660,0])
 
 //Roof
 
-translate([0,-610,roof_height])
+translate([0,roof_offset,roof_height - (-roof_offset * tan(roof_angle))])
 {
-	rotate([0,0,0])
+	rotate([roof_angle,0,0])
 	{
 		cube([1220,2440,12]);
 		translate([1220,0,0]){cube([1220,2440,12]);}
@@ -65,9 +68,9 @@ translate([0,-610,roof_height])
 	}
 }
 
-translate([0,1830,roof_height])
+translate([0,2440 + roof_offset,roof_height + ((2440 + roof_offset) * sin(roof_angle)) - (-roof_offset * tan(roof_angle)) ])
 {
-	rotate([0,0,0])
+	rotate([roof_angle,0,0])
 	{
 		cube([1220,2440,12]);
 		translate([1220,0,0]){cube([1220,2440,12]);}
