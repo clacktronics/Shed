@@ -1,5 +1,5 @@
 roof_height = 2440;
-roof_angle = 5;
+roof_angle = 3;
 beam_w = 50.8;
 beam_d = 101.6;
 roof_offset = -610;
@@ -8,6 +8,10 @@ ply_thickness = 18;
 front_height = -roof_offset * tan(roof_angle);
 mid_position = 2440 * tan(roof_angle);
 back_height = 3660 * tan(roof_angle);
+
+
+// human size
+translate([2440,2440,0]) {cube([500,500,1780]);}
 
 echo("The back beams are ", back_height, " high");
 
