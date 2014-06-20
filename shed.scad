@@ -9,6 +9,9 @@ front_height = -roof_offset * tan(roof_angle);
 mid_position = 2440 * tan(roof_angle);
 back_height = 3660 * tan(roof_angle);
 
+show_walls = true;
+show_roof = false;
+
 
 // human size
 translate([2440,2440,0]) {cube([500,500,1780]);}
@@ -61,9 +64,12 @@ translate([0,3660,0])
 
 //Roof
 
-translate([0,roof_offset,roof_height - front_height])
+if(show_roof)
 {
-	rotate([roof_angle,0,0])
+
+	translate([0,roof_offset,roof_height - front_height])
+	{
+		rotate([roof_angle,0,0])
 	{
 		cube([1220,2440,ply_thickness]);
 		translate([1220,0,0]){cube([1220,2440,ply_thickness]);}
@@ -71,6 +77,19 @@ translate([0,roof_offset,roof_height - front_height])
 	}
 
 }
+
+translate([0,2440 + roof_offset,roof_height + (2440 * sin(roof_angle)) - front_height ])
+{
+	rotate([roof_angle,0,0])
+	{
+		cube([1220,2440,ply_thickness]);
+		translate([1220,0,0]){cube([1220,2440,ply_thickness]);}
+		translate([2440,0,0]){cube([1220,2440,ply_thickness]);}
+	}
+}
+
+}
+
 
 // roof beams
 
@@ -89,44 +108,39 @@ translate([0,0,roof_height - beam_d])
 
 
 
-translate([0,2440 + roof_offset,roof_height + (2440 * sin(roof_angle)) - front_height ])
+
+
+
+	// S	ide walls
+if(show_walls)
 {
-	rotate([roof_angle,0,0])
+	// front wall
+	cube([1220,ply_thickness,2440]);
+	translate([1220,0,0]){cube([1220,ply_thickness,2440]);}
+	translate([2440,0,0]){cube([1220,ply_thickness,2440]);}
+
+	// left wall
+	translate([-ply_thickness,0,0])
 	{
-		cube([1220,2440,ply_thickness]);
-		translate([1220,0,0]){cube([1220,2440,ply_thickness]);}
-		translate([2440,0,0]){cube([1220,2440,ply_thickness]);}
+	cube([ply_thickness,1220,2440]);
+	translate([0,1220,0]){cube([ply_thickness,1220,2440]);}
+	translate([0,2440,0]){cube([ply_thickness,1220,2440]);}
 	}
-}
 
+	// right wall
+	translate([ 3660 + ply_thickness,0,0])
+	{
+	cube([ply_thickness,1220,2440]);
+	translate([0,1220,0]){cube([ply_thickness,1220,2440]);}
+	translate([0,2440,0]){cube([ply_thickness,1220,2440]);}
+	}
 
-// Side walls
+	// back wall
+	translate([0,3660 + beam_d,0])
+	{
+	cube([1220,ply_thickness,2440]);
+	translate([1220,0,0]){cube([1220,ply_thickness,2440]);}
+	translate([2440,0,0]){cube([1220,ply_thickness,2440]);}
+	}
 
-// front wall
-cube([1220,ply_thickness,2440]);
-translate([1220,0,0]){cube([1220,ply_thickness,2440]);}
-translate([2440,0,0]){cube([1220,ply_thickness,2440]);}
-
-// left wall
-translate([-ply_thickness,0,0])
-{
-cube([ply_thickness,1220,2440]);
-translate([0,1220,0]){cube([ply_thickness,1220,2440]);}
-translate([0,2440,0]){cube([ply_thickness,1220,2440]);}
-}
-
-// right wall
-translate([ 3660 + ply_thickness,0,0])
-{
-cube([ply_thickness,1220,2440]);
-translate([0,1220,0]){cube([ply_thickness,1220,2440]);}
-translate([0,2440,0]){cube([ply_thickness,1220,2440]);}
-}
-
-// back wall
-translate([0,3660 + beam_d,0])
-{
-cube([1220,ply_thickness,2440]);
-translate([1220,0,0]){cube([1220,ply_thickness,2440]);}
-translate([2440,0,0]){cube([1220,ply_thickness,2440]);}
-}
+	}
