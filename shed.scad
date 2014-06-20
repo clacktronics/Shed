@@ -98,3 +98,35 @@ translate([0,2440 + roof_offset,roof_height + (2440 * sin(roof_angle)) - front_h
 		translate([2440,0,0]){cube([1220,2440,ply_thickness]);}
 	}
 }
+
+
+// Side walls
+
+// front wall
+cube([1220,ply_thickness,2440]);
+translate([1220,0,0]){cube([1220,ply_thickness,2440]);}
+translate([2440,0,0]){cube([1220,ply_thickness,2440]);}
+
+// left wall
+translate([-ply_thickness,0,0])
+{
+cube([ply_thickness,1220,2440]);
+translate([0,1220,0]){cube([ply_thickness,1220,2440]);}
+translate([0,2440,0]){cube([ply_thickness,1220,2440]);}
+}
+
+// right wall
+translate([ 3660 + ply_thickness,0,0])
+{
+cube([ply_thickness,1220,2440]);
+translate([0,1220,0]){cube([ply_thickness,1220,2440]);}
+translate([0,2440,0]){cube([ply_thickness,1220,2440]);}
+}
+
+// back wall
+translate([0,3660 + beam_d,0])
+{
+cube([1220,ply_thickness,2440]);
+translate([1220,0,0]){cube([1220,ply_thickness,2440]);}
+translate([2440,0,0]){cube([1220,ply_thickness,2440]);}
+}
