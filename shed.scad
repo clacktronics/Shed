@@ -1,5 +1,5 @@
 roof_height = 2440;
-roof_angle = 3;
+roof_angle = 5;
 beam_w = 50.8;
 beam_d = 101.6;
 roof_offset = -610;
@@ -9,8 +9,12 @@ front_height = -roof_offset * tan(roof_angle);
 mid_position = 2440 * tan(roof_angle);
 back_height = 3660 * tan(roof_angle);
 
-show_walls = true;
-show_roof = false;
+
+mid1 = 1220 * sin(roof_angle);
+mid2 = 2440 * sin(roof_angle);
+
+show_walls = false;
+show_roof = 1;
 
 
 // human size
@@ -31,13 +35,13 @@ translate([3660 - beam_w,0,0]) {cube([beam_w,3660,beam_d]);}
 
 // side pilars
 
-		translate([0,1220,0]) { cube([beam_w,beam_d,roof_height]);}
-		translate([0,2440,0]) { cube([beam_w,beam_d,roof_height]);}
+		translate([0,1220,0]) { cube([beam_w,beam_d,roof_height + mid1]);}
+		translate([0,2440,0]) { cube([beam_w,beam_d,roof_height + mid2]);}
 
 		translate([3660 - beam_w,0,0])
 		{
-			translate([0,1220,0]) { cube([beam_w,beam_d,roof_height]);}
-			translate([0,2440,0]) { cube([beam_w,beam_d,roof_height]);}
+			translate([0,1220,0]) { cube([beam_w,beam_d,roof_height + mid1]);}
+			translate([0,2440,0]) { cube([beam_w,beam_d,roof_height + mid2]);}
 		}
 
 // front pilars and beams
@@ -98,7 +102,7 @@ translate([0,0,roof_height - beam_d])
 			 { 
 				rotate([roof_angle,0,0])
 				{				
-					cube([beam_w,3660,beam_d]); 
+					//cube([beam_w,3660,beam_d]); 
 					translate([1220 - (beam_w / 2),0,0]){cube([beam_w,3660,beam_d]); }
 					translate([2440 - (beam_w / 2),0,0]){cube([beam_w,3660,beam_d]); }
 					translate([3660 - beam_w,0,0]){cube([beam_w,3660,beam_d]); }
